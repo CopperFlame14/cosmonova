@@ -248,6 +248,93 @@
         .profile-menu.active .dropdown {
             display: block;
         }
+
+        /* Explore Page Styles */
+        #explore .post-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        #explore .post-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: var(--header-text);
+        }
+
+        #explore .post-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--header-text);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 1rem;
+            resize: vertical;
+            height: 100px;
+        }
+
+        #explore .post-form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--header-text);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        #explore .post-form button {
+            background: var(--header-text);
+            color: var(--header-background);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #explore .post-form button:hover {
+            background: #e0e0e0;
+        }
+
+        #explore .post {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #explore .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        #explore .post p {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        #explore .post img,
+        #explore .post video {
+            max-width: 100%;
+            border-radius: 5px;
+            display: block;
+            margin: 10px 0;
+        }
+
+        #explore .post video {
+            background: #000;
+        }
     </style>
 </head>
 <body>
@@ -298,8 +385,65 @@
 
         <div id="explore" class="page">
             <h2>Explore</h2>
-            <p>Discover new space-related content and connect with other enthusiasts!</p>
-            <!-- Add explore content here -->
+            <div class="videos-container">
+                <!-- Video Card Template -->
+                <div class="video-card" data-id="1">
+                    <video
+                        class="explore-video"
+                        muted
+                        controls="false"
+                        src="https://www.w3schools.com/html/mov_bbb.mp4"
+                        playsinline
+                    ></video>
+                    <h3>Video 1</h3>
+
+                    <!-- Likes Section -->
+                    <div class="likes-section">
+                        <button class="like-button">👍 Like</button>
+                        <span class="like-count">0 Likes</span>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <h4>Comments</h4>
+                        <ul class="comments-list"></ul>
+                        <input
+                            type="text"
+                            class="comment-input"
+                            placeholder="Add a comment and press Enter"
+                        />
+                    </div>
+                </div>
+
+                <!-- Add more video cards as needed -->
+                <div class="video-card" data-id="2">
+                    <video
+                        class="explore-video"
+                        muted
+                        controls="false"
+                        src="https://www.w3schools.com/html/movie.mp4"
+                        playsinline
+                    ></video>
+                    <h3>Video 2</h3>
+
+                    <!-- Likes Section -->
+                    <div class="likes-section">
+                        <button class="like-button">👍 Like</button>
+                        <span class="like-count">0 Likes</span>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <h4>Comments</h4>
+                        <ul class="comments-list"></ul>
+                        <input
+                            type="text"
+                            class="comment-input"
+                            placeholder="Add a comment and press Enter"
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="messages" class="page">
@@ -449,6 +593,51 @@
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
+        }
+
+        // Explore Page Functionality
+        function handleExploreSubmit() {
+            const caption = document.getElementById('explore-caption').value.trim();
+            const fileInput = document.getElementById('explore-file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const fileData = e.target.result;
+
+                const newPost = {
+                    id: Date.now(),
+                    caption,
+                    fileData,
+                    fileType: file.type,
+                };
+
+                displayExplorePost(newPost);
+
+                // Clear the form
+                document.getElementById('explore-caption').value = '';
+                fileInput.value = '';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function displayExplorePost(post) {
+            const explorePosts = document.getElementById('explore-posts');
+            const postElement = document.createElement('div');
+            postElement.className = 'post';
+            postElement.innerHTML = `
+                <p>${post.caption}</p>
+                ${post.fileType.startsWith('image') ?
+                    `<img src="${post.fileData}" alt="${post.caption}">` :
+                    `<video controls><source src="${post.fileData}" type="${post.fileType}">Your browser does not support the video tag.</video>`
+                }
+            `;
+            explorePosts.prepend(postElement);
         }
     </script>
 </body>
