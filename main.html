@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .stories {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .story {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .story img {
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        .posts {
+            padding: 10px;
+        }
+
+        .post {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .post img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .post .post-content {
+            margin-top: 10px;
+        }
+
+        .messages {
+            padding: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        .message {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .message:last-child {
+            border-bottom: none;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        .message .username {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Social Media</h1>
+    </div>
+
+    <div class="stories">
+        <div class="story">
+            <img src="https://via.placeholder.com/100" alt="Story 1">
+        </div>
+        <div class="story">
+            <img src="https://via.placeholder.com/100" alt="Story 2">
+        </div>
+        <div class="story">
+            <img src="https://via.placeholder.com/100" alt="Story 3">
+        </div>
+        <div class="story">
+            <img src="https://via.placeholder.com/100" alt="Story 4">
+        </div>
+        <div class="story">
+            <img src="https://via.placeholder.com/100" alt="Story 5">
+        </div>
+    </div>
+
+    <div class="posts">
+        <div class="post">
+            <img src="https://via.placeholder.com/400" alt="Post 1">
+            <div class="post-content">
+                <p>This is the first post content.</p>
+            </div>
+        </div>
+        <div class="post">
+            <img src="https://via.placeholder.com/400" alt="Post 2">
+            <div class="post-content">
+                <p>This is the second post content.</p>
+            </div>
+        </div>
+        <div class="post">
+            <img src="https://via.placeholder.com/400" alt="Post 3">
+            <div class="post-content">
+                <p>This is the third post content.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="messages">
+        <h2>Messages</h2>
+        <div class="message
