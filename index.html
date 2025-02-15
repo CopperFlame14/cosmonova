@@ -28,6 +28,13 @@
             gap: 20px; /* Add vertical space between buttons */
         }
 
+        h1 {
+            font-size: 5rem; /* Adjust the font size as needed */
+            margin-top: auto; 
+            text-align: center; 
+            font-family: "Times New Roman", Times, serif;
+        }
+        
         button {
             display: flex;
             align-items: center;
@@ -117,6 +124,9 @@
 <body>
     <div class="container">
         <div class="button-container">
+            <h1>
+                SpaceConnect
+            </h1> <!-- Centered heading -->
             <button id="loginBtn">
                 <svg
                   height="24"
@@ -148,7 +158,7 @@
                 </svg>
                 <span>Sign Up</span>
               </button>
-            <img src="lp1.jpg" alt="Image" class="side-image"> <!-- Replace with your image URL -->
+            
         </div>
     </div>
 
@@ -157,7 +167,7 @@
             <h2>Login</h2>
             <input type="text" placeholder="Username" required>
             <input type="password" placeholder="Password" required>
-            <button type="submit">     Submit     </button>
+            <button type="submit">Submit</button>
             <button type="button" id="backBtn">Back</button>
         </form>
 
@@ -206,7 +216,7 @@
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
             alert('Signed up successfully!');
-            // Redirect to main page 2
+            // Redirect to main page
             window.location.href = 'main.html'; // Change to your main page URL
         });
     </script>
