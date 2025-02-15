@@ -3,145 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
+    <title>Space Social Media</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f2f5;
+            background: linear-gradient(to bottom, #001f3f, #003366);
+            color: #ffffff;
         }
 
-        .header {
-            background-color: #ffffff;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        header {
+            background-color: #001f3f;
+            padding: 20px;
+            text-align: center;
         }
 
-        .header h1 {
+        h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 2.5em;
         }
 
-        .stories {
-            display: flex;
-            overflow-x: auto;
-            padding: 10px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .story {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: #e0e0e0;
-            margin-right: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+        .post-form {
+            background-color: #003366;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
-        .story img {
+        .post-form h2 {
+            margin-top: 0;
+        }
+
+        .post-form input, .post-form textarea {
             width: 100%;
-            border-radius: 50%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .post-form button {
+            background-color: #ffcc00;
+            color: #001f3f;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .post-form button:hover {
+            background-color: #e6b800;
         }
 
         .posts {
-            padding: 10px;
+            background-color: #003366;
+            border-radius: 8px;
+            padding: 20px;
         }
 
         .post {
-            background-color: #ffffff;
+            background-color: #001f3f;
             border-radius: 8px;
             padding: 15px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
-        .post img {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .post .post-content {
-            margin-top: 10px;
-        }
-
-        .messages {
-            padding: 10px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
-        }
-
-        .message {
-            padding: 10px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .message:last-child {
-            border-bottom: none;
-        }
-
-        .message p {
+        .post h3 {
             margin: 0;
+            font-size: 1.5em;
         }
 
-        .message .username {
-            font-weight: bold;
+        .post p {
+            margin: 10px 0 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #001f3f;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Social Media</h1>
-    </div>
+<header>
+    <h1>Space Social Media</h1>
+</header>
 
-    <div class="stories">
-        <div class="story">
-            <img src="https://via.placeholder.com/100" alt="Story 1">
-        </div>
-        <div class="story">
-            <img src="https://via.placeholder.com/100" alt="Story 2">
-        </div>
-        <div class="story">
-            <img src="https://via.placeholder.com/100" alt="Story 3">
-        </div>
-        <div class="story">
-            <img src="https://via.placeholder.com/100" alt="Story 4">
-        </div>
-        <div class="story">
-            <img src="https://via.placeholder.com/100" alt="Story 5">
-        </div>
+<div class="container">
+    <div class="post-form">
+        <h2>Create a Post</h2>
+        <input type="text" id="username" placeholder="Your Name" required>
+        <textarea id="content" rows="4" placeholder="What's on your mind about space?" required></textarea>
+        <button id="submitPost">Post</button>
     </div>
 
     <div class="posts">
+        <h2>Recent Posts</h2>
         <div class="post">
-            <img src="https://via.placeholder.com/400" alt="Post 1">
-            <div class="post-content">
-                <p>This is the first post content.</p>
-            </div>
+            <h3>John Doe</h3>
+            <p>Just saw the most amazing meteor shower last night! 🌠</p>
         </div>
         <div class="post">
-            <img src="https://via.placeholder.com/400" alt="Post 2">
-            <div class="post-content">
-                <p>This is the second post content.</p>
-            </div>
+            <h3>Jane Smith</h3>
+            <p>Did you know that a day on Venus is longer than a year on Venus? Fascinating! 🌌</p>
         </div>
         <div class="post">
-            <img src="https://via.placeholder.com/400" alt="Post 3">
-            <div class="post-content">
-                <p>This is the third post content.</p>
-            </div>
+            <h3>SpaceFan99</h3>
+            <p>Can't wait for the next Mars mission! 🚀</p>
         </div>
     </div>
+</div>
 
-    <div class="messages">
-        <h2>Messages</h2>
-        <div class="message
+<footer>
+    <p>&copy; 2023 Space Social Media. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
