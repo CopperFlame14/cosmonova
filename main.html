@@ -3,136 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Social Media</title>
+    <title>SpaceConnect - Social Media for Space Enthusiasts</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #001f3f, #003366);
-            color: #ffffff;
+            background-color: #f0f0f0;
+            color: #333;
         }
 
         header {
-            background-color: #001f3f;
-            padding: 20px;
-            text-align: center;
+            background-color: #1a1a2e;
+            color: white;
+            padding: 1rem;
         }
 
-        h1 {
+        header h1 {
             margin: 0;
-            font-size: 2.5em;
         }
 
-        .container {
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 1rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        main {
             max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
-        .post-form {
-            background-color: #003366;
+        #post-form {
+            background-color: white;
+            padding: 1rem;
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
         }
 
-        .post-form h2 {
-            margin-top: 0;
-        }
-
-        .post-form input, .post-form textarea {
+        #post-content {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
+            height: 100px;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        .post-form button {
-            background-color: #ffcc00;
-            color: #001f3f;
+        #post-button {
+            background-color: #16213e;
+            color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 0.5rem 1rem;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 1em;
-        }
-
-        .post-form button:hover {
-            background-color: #e6b800;
-        }
-
-        .posts {
-            background-color: #003366;
-            border-radius: 8px;
-            padding: 20px;
         }
 
         .post {
-            background-color: #001f3f;
+            background-color: white;
+            padding: 1rem;
             border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .post h3 {
-            margin: 0;
-            font-size: 1.5em;
-        }
-
-        .post p {
-            margin: 10px 0 0;
+            margin-bottom: 1rem;
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #001f3f;
-            position: relative;
-            bottom: 0;
-            width: 100%;
+            padding: 1rem;
+            background-color: #1a1a2e;
+            color: white;
         }
 
-        footer p {
-            margin: 0;
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>SpaceConnect</h1>
+        <nav>
+            <ul>
+                <li><a href="#home" onclick="showPage('home')">Home</a></li>
+                <li><a href="#profile" onclick="showPage('profile')">Profile</a></li>
+                <li><a href="#explore" onclick="showPage('explore')">Explore</a></li>
+                <li><a href="#messages" onclick="showPage('messages')">Messages</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<header>
-    <h1>Space Social Media</h1>
-</header>
+    <main>
+        <div id="home" class="page active">
+            <h2>Home</h2>
+            <section id="post-form">
+                <h3>Share Your Space Thoughts</h3>
+                <textarea id="post-content" placeholder="What's happening in space?"></textarea>
+                <button id="post-button">Post</button>
+            </section>
 
-<div class="container">
-    <div class="post-form">
-        <h2>Create a Post</h2>
-        <input type="text" id="username" placeholder="Your Name" required>
-        <textarea id="content" rows="4" placeholder="What's on your mind about space?" required></textarea>
-        <button id="submitPost">Post</button>
-    </div>
-
-    <div class="posts">
-        <h2>Recent Posts</h2>
-        <div class="post">
-            <h3>John Doe</h3>
-            <p>Just saw the most amazing meteor shower last night! 🌠</p>
+            <section id="feed">
+                <!-- Posts will be dynamically added here -->
+            </section>
         </div>
-        <div class="post">
-            <h3>Jane Smith</h3>
-            <p>Did you know that a day on Venus is longer than a year on Venus? Fascinating! 🌌</p>
-        </div>
-        <div class="post">
-            <h3>SpaceFan99</h3>
-            <p>Can't wait for the next Mars mission! 🚀</p>
-        </div>
-    </div>
-</div>
 
-<footer>
-    <p>&copy; 2023 Space Social Media. All rights reserved.</p>
-</footer>
+        <div id="profile" class="page">
+            <h2>Profile</h2>
+            <p>Welcome to your profile page! Here you can view and edit your personal information.</p>
+            <!-- Add profile content here -->
+        </div>
 
+        <div id="explore" class="page">
+            <h2>Explore</h2>
+            <p>Discover new space-related content and connect with other enthusiasts!</p>
+            <!-- Add explore content here -->
+        </div>
+
+        <div id="messages" class="page">
+            <h2>Messages</h2>
+            <p>Your private messages will appear here. Stay connected with your space friends!</p>
+            <!-- Add messaging functionality here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SpaceConnect. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const postButton = document.getElementById('post-button');
+            const postContent = document.getElementById('post-content');
+            const feed = document.getElementById('feed');
+
+            postButton.addEventListener('click', () => {
+                const content = postContent.value.trim();
+                if (content) {
+                    addPost(content);
+                    postContent.value = '';
+                }
+            });
+
+            function addPost(content) {
+                const post = document.createElement('div');
+                post.className = 'post';
+                post.innerHTML = `
+                    <p>${content}</p>
+                    <small>Posted on ${new Date().toLocaleString()}</small>
+                `;
+                feed.prepend(post);
+            }
+
+            // Sample posts
+            addPost("Just watched the SpaceX launch. Amazing!");
+            addPost("Who's excited for the next Mars rover mission?");
+        });
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
