@@ -23,85 +23,90 @@
 
         .button-container {
             display: flex;
-            align-items: center;
-            gap:20px;
-            column-gap: 20px;
+            flex-direction: column; /* Stack buttons vertically */
+            align-items: center; /* Center buttons horizontally */
+            gap: 20px; /* Add vertical space between buttons */
         }
 
         button {
             display: flex;
-  align-items: center;
-  font-family: inherit;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 17px;
-  padding: 10px 10px 10px 10px;
-  color: white;
-  background: #ad5389;
-  background: linear-gradient(to right, #3f008c, #007bff, #3f008c);
-  border: none;
-  letter-spacing: 0.05em;
-  border-radius: 16px;
+            align-items: center;
+            font-family: inherit;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 17px;
+            padding: 10px 20px; /* Adjusted padding for better appearance */
+            color: white;
+            background: linear-gradient(to right, #3f008c, #007bff, #3f008c);
+            border: none;
+            letter-spacing: 0.05em;
+            border-radius: 16px;
         }
-        button svg {
-  margin-right: 3px;
-  transform: rotate(30deg);
-  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-button span {
-  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-button:hover svg {
-  transform: translateX(5px) rotate(90deg);
-}
-
-button:hover span {
-  transform: translateX(7px);
-}
 
         button svg {
-  margin-right: 3px;
-  transform: rotate(30deg);
-  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
+            margin-right: 3px;
+            transform: rotate(30deg);
+            transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+        }
 
-button span {
-  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
+        button span {
+            transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+        }
 
-button:hover svg {
-  transform: translateX(5px) rotate(90deg);
-}
+        button:hover svg {
+            transform: translateX(5px) rotate(90deg);
+        }
 
-button:hover span {
-  transform: translateX(7px);
-}
-
+        button:hover span {
+            transform: translateX(7px);
+        }
 
         .side-image {
             width: 100px; /* Adjust size as needed */
             height: auto;
-            margin-left: 20px;
+            margin-top: 20px; /* Add space between buttons and image */
         }
 
         .form-container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .form {
             display: flex;
             flex-direction: column;
-            margin-top: 20px;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px; /* Fixed width for the form */
+        }
+
+        .form h2 {
+            margin-bottom: 20px; /* Space below the heading */
         }
 
         .form input {
-            margin: 5px;
+            margin: 10px 0; /* Increased vertical gap between input fields */
             padding: 10px;
             font-size: 16px;
+            width: 100%; /* Full width for input fields */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent input background */
+            color: white;
+        }
+
+        .form input::placeholder {
+            color: #ccc; /* Placeholder text color */
+        }
+
+        .form button {
+            margin-top: 20px; /* Increased space between input fields and buttons */
+            width: 100%; /* Full width for buttons */
         }
 
         .hidden {
@@ -143,7 +148,7 @@ button:hover span {
                 </svg>
                 <span>Sign Up</span>
               </button>
-            <img src="your-image-url.jpg" alt="Image" class="side-image"> <!-- Replace with your image URL -->
+            <img src="lp1.jpg" alt="Image" class="side-image"> <!-- Replace with your image URL -->
         </div>
     </div>
 
@@ -152,7 +157,7 @@ button:hover span {
             <h2>Login</h2>
             <input type="text" placeholder="Username" required>
             <input type="password" placeholder="Password" required>
-            <button type="submit">Submit</button>
+            <button type="submit">     Submit     </button>
             <button type="button" id="backBtn">Back</button>
         </form>
 
@@ -201,8 +206,9 @@ button:hover span {
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
             alert('Signed up successfully!');
-            // Redirect to main page
+            // Redirect to main page 2
             window.location.href = 'main.html'; // Change to your main page URL
         });
     </script>
 </body>
+</html>
