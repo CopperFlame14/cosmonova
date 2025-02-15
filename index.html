@@ -60,20 +60,26 @@
             text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc; /* Glow effect */
         }
         
-        button {
-            display: flex;
-            align-items: center;
-            font-family: inherit;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 17px;
-            padding: 10px 20px; /* Adjusted padding for better appearance */
-            color: white;
-            background: linear-gradient(to right, #3f008c, #007bff, #3f008c);
-            border: none;
-            letter-spacing: 0.05em;
-            border-radius: 16px;
-        }
+        /* Common styles for all buttons */
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center text horizontally and vertically */
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 17px;
+    padding: 10px 20px; /* Consistent padding */
+    color: white;
+    background: linear-gradient(to right, #3f008c, #007bff, #3f008c);
+    border: none;
+    letter-spacing: 0.05em;
+    border-radius: 16px;
+    text-align: center;
+    width: 200px; /* Fixed width for all buttons */
+    height: 50px; /* Fixed height for all buttons */
+    margin: 10px 0; /* Consistent margin */
+}
 
         button svg {
             margin-right: 3px;
@@ -138,10 +144,11 @@
             color: #ccc; /* Placeholder text color */
         }
 
-        .form button {
-            margin-top: 20px; /* Increased space between input fields and buttons */
-            width: 100%; /* Full width for buttons */
-        }
+        .form button[type="submit"], .form button[type="button"] {
+    margin-top: 30px; /* Increased space between input fields and buttons */
+    width: 100%; /* Full width for Submit buttons */
+    height: 50px; /* Fixed height for Submit buttons */
+}
 
         .hidden {
             display: none;
@@ -279,45 +286,44 @@
     </div>
 
     <div class="container">
-        <div class="translucent-rectangle"></div> <!-- Translucent rectangle -->
-        <div class="button-container">
-            <h1>
-                SpaceConnect
-            </h1> <!-- Centered heading -->
-            <button id="loginBtn">
-                <svg
-                  height="24"
-                  width="24"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M5 13c0-5.088 2.903-9.436 7-11.182C16.097 3.564 19 7.912 19 13c0 .823-.076 1.626-.22 2.403l1.94 1.832a.5.5 0 0 1 .095.603l-2.495 4.575a.5.5 0 0 1-.793.114l-2.234-2.234a1 1 0 0 0-.707-.293H9.414a1 1 0 0 0-.707.293l-2.234 2.234a.5.5 0 0 1-.793-.114l-2.495-4.575a.5.5 0 0 1 .095-.603l1.94-1.832C5.077 14.626 5 13.823 5 13zm1.476 6.696l.817-.817A3 3 0 0 1 9.414 18h5.172a3 3 0 0 1 2.121.879l.817.817.982-1.8-1.1-1.04a2 2 0 0 1-.593-1.82c.124-.664.187-1.345.187-2.036 0-3.87-1.995-7.3-5-8.96C8.995 5.7 7 9.13 7 13c0 .691.063 1.372.187 2.037a2 2 0 0 1-.593 1.82l-1.1 1.039.982 1.8zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-                <span>Login</span>
-              </button>
-  
-              <button id="signupBtn">
-                <svg
-                  height="24"
-                  width="24"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path
-                    d="M5 13c0-5.088 2.903-9.436 7-11.182C16.097 3.564 19 7.912 19 13c0 .823-.076 1.626-.22 2.403l1.94 1.832a.5.5 0 0 1 .095.603l-2.495 4.575a.5.5 0 0 1-.793.114l-2.234-2.234a1 1 0 0 0-.707-.293H9.414a1 1 0 0 0-.707.293l-2.234 2.234a.5.5 0 0 1-.793-.114l-2.495-4.575a.5.5 0 0 1 .095-.603l1.94-1.832C5.077 14.626 5 13.823 5 13zm1.476 6.696l.817-.817A3 3 0 0 1 9.414 18h5.172a3 3 0 0 1 2.121.879l.817.817.982-1.8-1.1-1.04a2 2 0 0 1-.593-1.82c.124-.664.187-1.345.187-2.036 0-3.87-1.995-7.3-5-8.96C8.995 5.7 7 9.13 7 13c0 .691.063 1.372.187 2.037a2 2 0 0 1-.593 1.82l-1.1 1.039.982 1.8zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-                <span>Sign Up</span>
-              </button>
-            
-        </div>
-    </div>
+      <div class="translucent-rectangle"></div> <!-- Translucent rectangle -->
+      <div class="button-container">
+          <h1>
+              SpaceConnect
+          </h1> <!-- Centered heading -->
+          <button id="loginBtn">
+              <svg
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M5 13c0-5.088 2.903-9.436 7-11.182C16.097 3.564 19 7.912 19 13c0 .823-.076 1.626-.22 2.403l1.94 1.832a.5.5 0 0 1 .095.603l-2.495 4.575a.5.5 0 0 1-.793.114l-2.234-2.234a1 1 0 0 0-.707-.293H9.414a1 1 0 0 0-.707.293l-2.234 2.234a.5.5 0 0 1-.793-.114l-2.495-4.575a.5.5 0 0 1 .095-.603l1.94-1.832C5.077 14.626 5 13.823 5 13zm1.476 6.696l.817-.817A3 3 0 0 1 9.414 18h5.172a3 3 0 0 1 2.121.879l.817.817.982-1.8-1.1-1.04a2 2 0 0 1-.593-1.82c.124-.664.187-1.345.187-2.036 0-3.87-1.995-7.3-5-8.96C8.995 5.7 7 9.13 7 13c0 .691.063 1.372.187 2.037a2 2 0 0 1-.593 1.82l-1.1 1.039.982 1.8zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+              <span>Login</span>
+            </button>
+
+            <button id="signupBtn">
+              <svg
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M5 13c0-5.088 2.903-9.436 7-11.182C16.097 3.564 19 7.912 19 13c0 .823-.076 1.626-.22 2.403l1.94 1.832a.5.5 0 0 1 .095.603l-2.495 4.575a.5.5 0 0 1-.793.114l-2.234-2.234a1 1 0 0 0-.707-.293H9.414a1 1 0 0 0-.707.293l-2.234 2.234a.5.5 0 0 1-.793-.114l-2.495-4.575a.5.5 0 0 1 .095-.603l1.94-1.832C5.077 14.626 5 13.823 5 13zm1.476 6.696l.817-.817A3 3 0 0 1 9.414 18h5.172a3 3 0 0 1 2.121.879l.817.817.982-1.8-1.1-1.04a2 2 0 0 1-.593-1.82c.124-.664.187-1.345.187-2.036 0-3.87-1.995-7.3-5-8.96C8.995 5.7 7 9.13 7 13c0 .691.063 1.372.187 2.037a2 2 0 0 1-.593 1.82l-1.1 1.039.982 1.8zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+              <span>Sign Up</span>
+            </button>
+      </div>
+  </div>
 
     <!-- Overlay for translucent white background -->
     <div class="overlay hidden"></div>
