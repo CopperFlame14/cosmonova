@@ -5,17 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpaceConnect - Social Media for Space Enthusiasts</title>
     <style>
+        :root {
+            --background-color: #f0f0f0;
+            --text-color: #333;
+            --header-background: #1a1a2e;
+            --header-text: white;
+            --post-background: white;
+            --post-text: #333;
+            --footer-background: #1a1a2e;
+            --footer-text: white;
+        }
+
+        [data-theme="dark"] {
+            --background-color: #121212;
+            --text-color: #e0e0e0;
+            --header-background: #0d0d0d;
+            --header-text: #e0e0e0;
+            --post-background: #1e1e1e;
+            --post-text: #e0e0e0;
+            --footer-background: #0d0d0d;
+            --footer-text: #e0e0e0;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
 
         header {
-            background-color: #1a1a2e;
-            color: white;
+            background-color: var(--header-background);
+            color: var(--header-text);
             padding: 1rem;
             display: flex;
             justify-content: space-between;
@@ -42,7 +64,7 @@
         }
 
         nav ul li a {
-            color: white;
+            color: var(--header-text);
             text-decoration: none;
             cursor: pointer;
         }
@@ -53,7 +75,7 @@
             border-radius: 50%;
             object-fit: cover;
             cursor: pointer;
-            border: 2px solid white;
+            border: 2px solid var(--header-text);
         }
 
         main {
@@ -63,7 +85,7 @@
         }
 
         #post-form {
-            background-color: white;
+            background-color: var(--post-background);
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 2rem;
@@ -76,6 +98,8 @@
             padding: 0.5rem;
             border: 1px solid #ccc;
             border-radius: 4px;
+            background-color: var(--post-background);
+            color: var(--post-text);
         }
 
         #media-upload {
@@ -92,10 +116,11 @@
         }
 
         .post {
-            background-color: white;
+            background-color: var(--post-background);
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1rem;
+            color: var(--post-text);
         }
 
         .post img,
@@ -108,8 +133,8 @@
         footer {
             text-align: center;
             padding: 1rem;
-            background-color: #1a1a2e;
-            color: white;
+            background-color: var(--footer-background);
+            color: var(--footer-text);
         }
 
         .page {
@@ -120,9 +145,19 @@
             display: block;
         }
 
+        /* Theme Toggle Button */
+        #theme-toggle {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--header-text);
+            padding-left: 73%;
+        }
+
         /* Profile Page Styles */
         #profile {
-            background-color: white;
+            background-color: var(--post-background);
             padding: 1rem;
             border-radius: 8px;
         }
@@ -133,6 +168,7 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 1rem;
+            padding-left: 10px;
         }
 
         #profile-bio {
@@ -142,6 +178,8 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             margin-bottom: 1rem;
+            background-color: var(--post-background);
+            color: var(--post-text);
         }
 
         #profile-picture-upload {
@@ -169,6 +207,7 @@
                 <li><a href="#messages" onclick="showPage('messages')">Messages</a></li>
             </ul>
         </nav>
+        <button id="theme-toggle">🌓</button>
         <img id="profile-picture-header" src="https://via.placeholder.com/40" alt="Profile Picture" onclick="showPage('profile')">
     </header>
 
@@ -303,6 +342,16 @@
                 } else {
                     alert('Please write something about yourself.');
                 }
+            });
+
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            themeToggle.addEventListener('click', () => {
+                const isDarkTheme = body.getAttribute('data-theme') === 'dark';
+                body.setAttribute('data-theme', isDarkTheme ? 'light' : 'dark');
+                themeToggle.textContent = isDarkTheme ?'🌓':'🌞';
             });
         });
 
