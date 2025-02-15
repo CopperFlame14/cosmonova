@@ -17,26 +17,43 @@
             background-color: #1a1a2e;
             color: white;
             padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
         }
 
         header h1 {
             margin: 0;
         }
 
+        nav {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
         nav ul {
             list-style-type: none;
             padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 1rem;
+            margin: 0;
+            display: flex;
+            gap: 1rem;
         }
 
         nav ul li a {
             color: white;
             text-decoration: none;
             cursor: pointer;
+        }
+
+        #profile-picture-header {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid white;
         }
 
         main {
@@ -91,6 +108,43 @@
         .page.active {
             display: block;
         }
+
+        /* Profile Page Styles */
+        #profile {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        #profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        #profile-bio {
+            width: 100%;
+            height: 100px;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        #profile-picture-upload {
+            margin-bottom: 1rem;
+        }
+
+        #profile-save-button {
+            background-color: #16213e;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -104,6 +158,7 @@
                 <li><a href="#messages" onclick="showPage('messages')">Messages</a></li>
             </ul>
         </nav>
+        <img id="profile-picture-header" src="https://via.placeholder.com/40" alt="Profile Picture" onclick="showPage('profile')">
     </header>
 
     <main>
@@ -121,9 +176,13 @@
         </div>
 
         <div id="profile" class="page">
-            <h2>Profile</h2>
-            <p>Welcome to your profile page! Here you can view and edit your personal information.</p>
-            <!-- Add profile content here -->
+            <h2>My Profile</h2>
+            <div>
+                <img id="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture">
+                <input type="file" id="profile-picture-upload" accept="image/*">
+            </div>
+            <textarea id="profile-bio" placeholder="Write something about yourself..."></textarea>
+            <button id="profile-save-button">Save</button>
         </div>
 
         <div id="explore" class="page">
@@ -149,6 +208,7 @@
             const postContent = document.getElementById('post-content');
             const feed = document.getElementById('feed');
 
+            // Handle post creation
             postButton.addEventListener('click', () => {
                 const content = postContent.value.trim();
                 if (content) {
@@ -157,6 +217,7 @@
                 }
             });
 
+            // Add a new post
             function addPost(content) {
                 const post = document.createElement('div');
                 post.className = 'post';
@@ -170,8 +231,39 @@
             // Sample posts
             addPost("Just watched the SpaceX launch. Amazing!");
             addPost("Who's excited for the next Mars rover mission?");
+
+            // Profile Picture Upload
+            const profilePictureUpload = document.getElementById('profile-picture-upload');
+            const profilePicture = document.getElementById('profile-picture');
+            const profilePictureHeader = document.getElementById('profile-picture-header');
+
+            profilePictureUpload.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        profilePicture.src = e.target.result;
+                        profilePictureHeader.src = e.target.result; // Update header profile picture
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Save Profile Bio
+            const profileSaveButton = document.getElementById('profile-save-button');
+            const profileBio = document.getElementById('profile-bio');
+
+            profileSaveButton.addEventListener('click', () => {
+                const bio = profileBio.value.trim();
+                if (bio) {
+                    alert('Profile saved successfully!');
+                } else {
+                    alert('Please write something about yourself.');
+                }
+            });
         });
 
+        // Show the selected page
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
