@@ -371,16 +371,14 @@
             <div class="profile-menu">
                 <span>⋮</span>
                 <div class="dropdown">
-                    <button id="edit-profile-button">Edit Profile</button>
+                    <button id="edit-profile-button" onclick="console.log('Edit Profile clicked'); window.location.href='edit-profile.html'">Edit Profile</button>
                 </div>
             </div>
             <h2>My Profile</h2>
             <div>
                 <img id="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture">
-                <input type="file" id="profile-picture-upload" accept="image/*">
             </div>
             <textarea id="profile-bio" placeholder="Write something about yourself..."></textarea>
-            <button id="profile-save-button">Save</button>
         </div>
 
         <div id="explore" class="page">
@@ -518,40 +516,6 @@
             addPost("Just watched the SpaceX launch. Amazing!", null);
             addPost("Who's excited for the next Mars rover mission?", null);
 
-            // Profile Picture Upload
-            const profilePictureUpload = document.getElementById('profile-picture-upload');
-            const profilePicture = document.getElementById('profile-picture');
-            const profilePictureHeader = document.getElementById('profile-picture-header');
-
-            profilePictureUpload.addEventListener('change', (event) => {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        profilePicture.src = e.target.result;
-                        profilePictureHeader.src = e.target.result; // Update header profile picture
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // Save Profile Bio
-            const profileSaveButton = document.getElementById('profile-save-button');
-            const profileBio = document.getElementById('profile-bio');
-
-            profileSaveButton.addEventListener('click', () => {
-                const bio = profileBio.value.trim();
-                if (bio) {
-                    alert('Profile saved successfully!');
-                    // Disable the Save button after saving
-                    profileSaveButton.disabled = true;
-                    profileSaveButton.style.opacity = '0.5';
-                    profileSaveButton.style.pointerEvents = 'none';
-                } else {
-                    alert('Please write something about yourself.');
-                }
-            });
-
             // Theme Toggle
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
@@ -576,15 +540,29 @@
                 profileMenu.classList.remove('active');
             });
 
-            // Enable editing when "Edit Profile" is clicked
-            editProfileButton.addEventListener('click', () => {
-                profileBio.removeAttribute('readonly');
-                profileBio.style.pointerEvents = 'auto';
-                profilePictureUpload.style.pointerEvents = 'auto';
-                profileSaveButton.style.pointerEvents = 'auto';
-                profileSaveButton.style.opacity = '1';
-                profileSaveButton.disabled = false; // Enable the Save button
-                alert('Editing enabled. Make your changes and click "Save".');
+            // Like Button Functionality
+            const likeButtons = document.querySelectorAll('.like-button');
+
+            likeButtons.forEach((button) => {
+                let isLiked = false; // Track whether the user has liked the post
+
+                button.addEventListener('click', () => {
+                    const likeCount = button.nextElementSibling; // The span containing the like count
+                    let currentLikes = parseInt(likeCount.textContent); // Get the current like count
+
+                    if (isLiked) {
+                        // If already liked, decrease the like count
+                        currentLikes--;
+                        button.textContent = '👍 Like'; // Reset the button text
+                    } else {
+                        // If not liked, increase the like count
+                        currentLikes++;
+                        button.textContent = '👎 Unlike'; // Change the button text
+                    }
+
+                    likeCount.textContent = `${currentLikes} Likes`; // Update the like count display
+                    isLiked = !isLiked; // Toggle the like state
+                });
             });
         });
 
@@ -595,50 +573,21 @@
             document.getElementById(pageId).classList.add('active');
         }
 
-        // Explore Page Functionality
-        function handleExploreSubmit() {
-            const caption = document.getElementById('explore-caption').value.trim();
-            const fileInput = document.getElementById('explore-file');
-            const file = fileInput.files[0];
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved profile data
+            const savedUsername = localStorage.getItem('username');
+            const savedBio = localStorage.getItem('bio');
+            const savedProfilePicture = localStorage.getItem('profilePicture');
 
-            if (!file) {
-                alert('Please select a file.');
-                return;
+            if (savedUsername) {
+                document.getElementById('profile-bio').value = savedBio;
             }
 
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const fileData = e.target.result;
-
-                const newPost = {
-                    id: Date.now(),
-                    caption,
-                    fileData,
-                    fileType: file.type,
-                };
-
-                displayExplorePost(newPost);
-
-                // Clear the form
-                document.getElementById('explore-caption').value = '';
-                fileInput.value = '';
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function displayExplorePost(post) {
-            const explorePosts = document.getElementById('explore-posts');
-            const postElement = document.createElement('div');
-            postElement.className = 'post';
-            postElement.innerHTML = `
-                <p>${post.caption}</p>
-                ${post.fileType.startsWith('image') ?
-                    `<img src="${post.fileData}" alt="${post.caption}">` :
-                    `<video controls><source src="${post.fileData}" type="${post.fileType}">Your browser does not support the video tag.</video>`
-                }
-            `;
-            explorePosts.prepend(postElement);
-        }
+            if (savedProfilePicture) {
+                document.getElementById('profile-picture').src = savedProfilePicture;
+                document.getElementById('profile-picture-header').src = savedProfilePicture;
+            }
+        });
     </script>
 </body>
 </html>
