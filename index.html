@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login and Sign Up</title>
-    <!-- Import Orbitron font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Import Roboto (minimalistic and bold) font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Import Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             margin: 0;
@@ -25,19 +19,6 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            position: relative; /* Ensure the container is positioned relative for absolute positioning of children */
-        }
-
-        .translucent-rectangle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%; /* Adjust the width as needed */
-            height: 60%; /* Adjust the height as needed */
-            background-color: rgba(0, 0, 0, 0.5); /* Translucent black */
-            border-radius: 20px; /* Rounded corners */
-            z-index: 1; /* Ensure it is behind the buttons */
         }
 
         .button-container {
@@ -45,19 +26,13 @@
             flex-direction: column; /* Stack buttons vertically */
             align-items: center; /* Center buttons horizontally */
             gap: 20px; /* Add vertical space between buttons */
-            z-index: 2; /* Ensure buttons are above the translucent rectangle */
         }
 
         h1 {
             font-size: 5rem; /* Adjust the font size as needed */
             margin-top: auto; 
             text-align: center; 
-            font-family: 'Orbitron', sans-serif; /* Futuristic font */
-            font-weight: 700; /* Bold weight for a stronger look */
-            letter-spacing: 4px; /* Add spacing between letters for a sci-fi feel */
-            text-transform: uppercase; /* Uppercase text for a modern look */
-            color: #00ffcc; /* Futuristic neon color */
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc; /* Glow effect */
+            font-family: "Times New Roman", Times, serif;
         }
         
         button {
@@ -105,7 +80,6 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            position: relative; /* Ensure the form container is positioned relative */
         }
 
         .form {
@@ -115,8 +89,7 @@
             background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for better readability */
             padding: 20px;
             border-radius: 10px;
-            width: 400px; /* Increased width for the form */
-            z-index: 3; /* Ensure the form is above the darker overlay */
+            width: 300px; /* Fixed width for the form */
         }
 
         .form h2 {
@@ -146,140 +119,10 @@
         .hidden {
             display: none;
         }
-
-        /* Overlay for translucent white background */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.2); /* Translucent white */
-            z-index: 1; /* Ensure it's behind the form but above the background */
-            display: none; /* Hidden by default */
-        }
-
-        /* Darker overlay for login/signup forms */
-        .darker-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Darker translucent black */
-            z-index: 2; /* Ensure it's above the white overlay but below the form */
-            display: none; /* Hidden by default */
-        }
-
-        /* About Us and Contact Us Buttons */
-        .top-left-buttons {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            display: flex;
-            gap: 15px; /* Space between buttons */
-            z-index: 3; /* Ensure it's above other elements */
-        }
-
-        .top-left-buttons button {
-            background: none;
-            border: none;
-            color: white;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 16px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .top-left-buttons button:hover {
-            color: #00ffcc; /* Neon color on hover */
-        }
-
-        /* About Us and Contact Us Pages */
-        .about-us, .contact-us {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8); /* Darker background for better readability */
-            padding: 40px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 800px; /* Larger rectangle */
-            text-align: center;
-            z-index: 2;
-        }
-
-        .about-us h2, .contact-us h2 {
-            font-size: 2.5rem; /* Larger font size */
-            font-family: 'Orbitron', sans-serif; /* Keep the same font as the rest of the page */
-            font-weight: 700; /* Bold */
-            color: #00ffcc; /* Neon color */
-            margin-bottom: 20px;
-        }
-
-        .about-us p, .contact-us p {
-            font-size: 1.2rem; /* Larger font size */
-            font-family: 'Roboto', sans-serif; /* Minimalistic and bold font for content */
-            line-height: 1.8;
-            color: white;
-        }
-
-        .about-us button, .contact-us button {
-            margin-top: 30px;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            background: linear-gradient(to right, #3f008c, #007bff, #3f008c);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .about-us button:hover, .contact-us button:hover {
-            transform: scale(1.05); /* Slightly enlarge on hover */
-        }
-
-        /* Social Media Bar */
-        .social-media-bar {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 15px; /* Space between icons */
-            z-index: 3; /* Ensure it's above other elements */
-        }
-
-        .social-media-bar a {
-            color: white;
-            font-size: 24px;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .social-media-bar a:hover {
-            color: #00ffcc; /* Neon color on hover */
-            transform: scale(1.2); /* Slightly enlarge on hover */
-        }
     </style>
 </head>
 <body>
-    <!-- About Us and Contact Us Buttons -->
-    <div class="top-left-buttons">
-        <button id="aboutUsBtn">About Us</button>
-        <button id="contactUsBtn">Contact Us</button>
-    </div>
-
-    <!-- Social Media Bar -->
-    <div class="social-media-bar">
-        <a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-        <a href="https://snapchat.com" target="_blank"><i class="fab fa-snapchat"></i></a>
-    </div>
-
     <div class="container">
-        <div class="translucent-rectangle"></div> <!-- Translucent rectangle -->
         <div class="button-container">
             <h1>
                 SpaceConnect
@@ -319,12 +162,6 @@
         </div>
     </div>
 
-    <!-- Overlay for translucent white background -->
-    <div class="overlay hidden"></div>
-
-    <!-- Darker overlay for login/signup forms -->
-    <div class="darker-overlay hidden"></div>
-
     <div id="formContainer" class="form-container hidden">
         <form id="loginForm" class="form hidden">
             <h2>Login</h2>
@@ -343,101 +180,29 @@
         </form>
     </div>
 
-    <!-- About Us Page -->
-    <div id="aboutUsPage" class="about-us hidden">
-        <h2>About Us</h2>
-        <p>
-            SpaceConnect is a revolutionary social media platform designed exclusively for space enthusiasts. 
-            Whether you're an amateur astronomer, a professional astrophysicist, or simply someone fascinated 
-            by the mysteries of the cosmos, SpaceConnect is your gateway to connect with like-minded individuals 
-            from around the globe. Share your discoveries, discuss the latest space missions, and stay updated 
-            with cutting-edge research. Join us in exploring the final frontier and building a community that 
-            reaches for the stars!
-        </p>
-        <button id="backToMainFromAbout">Back to Main Page</button>
-    </div>
-
-    <!-- Contact Us Page -->
-    <div id="contactUsPage" class="contact-us hidden">
-        <h2>Contact Us</h2>
-        <p>
-            Have questions or feedback? Feel free to reach out to us at:
-        </p>
-        <p>
-            <strong>Email 1:</strong> support@spaceconnect.com<br>
-            <strong>Email 2:</strong> info@spaceconnect.com
-        </p>
-        <p>
-            We value your input and are here to assist you with any inquiries.
-        </p>
-        <button id="backToMainFromContact">Back to Main Page</button>
-    </div>
-
     <script>
-        const overlay = document.querySelector('.overlay');
-        const darkerOverlay = document.querySelector('.darker-overlay');
-        const formContainer = document.getElementById('formContainer');
-        const aboutUsPage = document.getElementById('aboutUsPage');
-        const contactUsPage = document.getElementById('contactUsPage');
-
         document.getElementById('loginBtn').addEventListener('click', function() {
             document.querySelector('.container').classList.add('hidden');
-            formContainer.classList.remove('hidden');
+            document.getElementById('formContainer').classList.remove('hidden');
             document.getElementById('loginForm').classList.remove('hidden');
-            overlay.classList.remove('hidden'); // Show white overlay
-            darkerOverlay.classList.remove('hidden'); // Show darker overlay
         });
 
         document.getElementById('signupBtn').addEventListener('click', function() {
             document.querySelector('.container').classList.add('hidden');
-            formContainer.classList.remove('hidden');
+            document.getElementById('formContainer').classList.remove('hidden');
             document.getElementById('signupForm').classList.remove('hidden');
-            overlay.classList.remove('hidden'); // Show white overlay
-            darkerOverlay.classList.remove('hidden'); // Show darker overlay
         });
 
         document.getElementById('backBtn').addEventListener('click', function() {
-            formContainer.classList.add('hidden');
+            document.getElementById('formContainer').classList.add('hidden');
             document.querySelector('.container').classList.remove('hidden');
             document.getElementById('loginForm').classList.add('hidden');
-            overlay.classList.add('hidden'); // Hide white overlay
-            darkerOverlay.classList.add('hidden'); // Hide darker overlay
         });
 
         document.getElementById('backBtnSignup').addEventListener('click', function() {
-            formContainer.classList.add('hidden');
+            document.getElementById('formContainer').classList.add('hidden');
             document.querySelector('.container').classList.remove('hidden');
             document.getElementById('signupForm').classList.add('hidden');
-            overlay.classList.add('hidden'); // Hide white overlay
-            darkerOverlay.classList.add('hidden'); // Hide darker overlay
-        });
-
-        // Handle About Us Button
-        document.getElementById('aboutUsBtn').addEventListener('click', function() {
-            document.querySelector('.container').classList.add('hidden');
-            aboutUsPage.classList.remove('hidden');
-            overlay.classList.remove('hidden'); // Show overlay
-        });
-
-        // Handle Contact Us Button
-        document.getElementById('contactUsBtn').addEventListener('click', function() {
-            document.querySelector('.container').classList.add('hidden');
-            contactUsPage.classList.remove('hidden');
-            overlay.classList.remove('hidden'); // Show overlay
-        });
-
-        // Handle Back to Main Page from About Us
-        document.getElementById('backToMainFromAbout').addEventListener('click', function() {
-            aboutUsPage.classList.add('hidden');
-            document.querySelector('.container').classList.remove('hidden');
-            overlay.classList.add('hidden'); // Hide overlay
-        });
-
-        // Handle Back to Main Page from Contact Us
-        document.getElementById('backToMainFromContact').addEventListener('click', function() {
-            contactUsPage.classList.add('hidden');
-            document.querySelector('.container').classList.remove('hidden');
-            overlay.classList.add('hidden'); // Hide overlay
         });
 
         // Handle form submission (for demonstration purposes)
