@@ -160,6 +160,7 @@
             background-color: var(--post-background);
             padding: 1rem;
             border-radius: 8px;
+            position: relative;
         }
 
         #profile-picture {
@@ -168,7 +169,6 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 1rem;
-            padding-left: 10px;
         }
 
         #profile-bio {
@@ -180,10 +180,13 @@
             margin-bottom: 1rem;
             background-color: var(--post-background);
             color: var(--post-text);
+            resize: none;
+            pointer-events: none; /* Disable editing by default */
         }
 
         #profile-picture-upload {
             margin-bottom: 1rem;
+            pointer-events: none; /* Disable editing by default */
         }
 
         #profile-save-button {
@@ -193,6 +196,46 @@
             padding: 0.5rem 1rem;
             border-radius: 4px;
             cursor: pointer;
+            pointer-events: none; /* Disable editing by default */
+            opacity: 0.5; /* Make it look disabled */
+        }
+
+        /* Three-dot menu */
+        .profile-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+        }
+
+        .profile-menu .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--post-background);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .profile-menu .dropdown button {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--post-text);
+            cursor: pointer;
+        }
+
+        .profile-menu .dropdown button:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-menu.active .dropdown {
+            display: block;
         }
     </style>
 </head>
@@ -227,6 +270,12 @@
         </div>
 
         <div id="profile" class="page">
+            <div class="profile-menu">
+                <span>⋮</span>
+                <div class="dropdown">
+                    <button id="edit-profile-button">Edit Profile</button>
+                </div>
+            </div>
             <h2>My Profile</h2>
             <div>
                 <img id="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture">
@@ -339,6 +388,10 @@
                 const bio = profileBio.value.trim();
                 if (bio) {
                     alert('Profile saved successfully!');
+                    // Disable the Save button after saving
+                    profileSaveButton.disabled = true;
+                    profileSaveButton.style.opacity = '0.5';
+                    profileSaveButton.style.pointerEvents = 'none';
                 } else {
                     alert('Please write something about yourself.');
                 }
@@ -351,7 +404,32 @@
             themeToggle.addEventListener('click', () => {
                 const isDarkTheme = body.getAttribute('data-theme') === 'dark';
                 body.setAttribute('data-theme', isDarkTheme ? 'light' : 'dark');
-                themeToggle.textContent = isDarkTheme ?'🌓':'🌞';
+                themeToggle.textContent = isDarkTheme ? '🌓':'🌞';
+            });
+
+            // Three-dot menu for profile editing
+            const profileMenu = document.querySelector('.profile-menu');
+            const editProfileButton = document.getElementById('edit-profile-button');
+
+            profileMenu.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent the click from closing the dropdown immediately
+                profileMenu.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', () => {
+                profileMenu.classList.remove('active');
+            });
+
+            // Enable editing when "Edit Profile" is clicked
+            editProfileButton.addEventListener('click', () => {
+                profileBio.removeAttribute('readonly');
+                profileBio.style.pointerEvents = 'auto';
+                profilePictureUpload.style.pointerEvents = 'auto';
+                profileSaveButton.style.pointerEvents = 'auto';
+                profileSaveButton.style.opacity = '1';
+                profileSaveButton.disabled = false; // Enable the Save button
+                alert('Editing enabled. Make your changes and click "Save".');
             });
         });
 
