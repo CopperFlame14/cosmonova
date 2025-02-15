@@ -15,6 +15,7 @@
             --footer-background: #1a1a2e;
             --footer-text: white;
             --background-image: url('https://th.bing.com/th/id/OIP.Gd4NDqeIdmX04Vp-PqqzVQHaE8?rs=1&pid=ImgDetMain'); /* Light theme background image */
+            --main-background:rgba(255, 255, 255, 0.5);
         }
 
         [data-theme="dark"] {
@@ -27,6 +28,7 @@
             --footer-background: #0d0d0d;
             --footer-text: #e0e0e0;
             --background-image: url('https://th.bing.com/th/id/R.b108427141d977e1530072a3268eea65?rik=4mlY93%2f66dMeAA&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f08%2fNight-Sky-Milky-Way-Galaxy-Wallpaper.jpg&ehk=PeL8fhnPu3P4MbsHB%2fDsbaIyHdVOtcho0sta3wlylbk%3d&risl=&pid=ImgRaw&r=0'); /* No background image in dark theme */
+            --main-background:rgba(0, 0, 0, 0.5);
         }
 
         body {
@@ -88,7 +90,7 @@
             max-width: 800px;
             margin: 2rem auto;
             padding: 0 1rem;
-            background-color: rgba(255, 255, 255, 0.5); 
+            background-color: var(--main-background);
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
