@@ -78,6 +78,10 @@
             border-radius: 4px;
         }
 
+        #media-upload {
+            margin-bottom: 1rem;
+        }
+
         #post-button {
             background-color: #16213e;
             color: white;
@@ -90,6 +94,13 @@
         .post {
             background-color: white;
             padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .post img,
+        .post video {
+            max-width: 100%;
             border-radius: 8px;
             margin-bottom: 1rem;
         }
@@ -167,6 +178,7 @@
             <section id="post-form">
                 <h3>Share Your Space Thoughts</h3>
                 <textarea id="post-content" placeholder="What's happening in space?"></textarea>
+                <input type="file" id="media-upload" accept="image/*, video/*">
                 <button id="post-button">Post</button>
             </section>
 
@@ -206,31 +218,62 @@
         document.addEventListener('DOMContentLoaded', () => {
             const postButton = document.getElementById('post-button');
             const postContent = document.getElementById('post-content');
+            const mediaUpload = document.getElementById('media-upload');
             const feed = document.getElementById('feed');
 
             // Handle post creation
             postButton.addEventListener('click', () => {
                 const content = postContent.value.trim();
-                if (content) {
-                    addPost(content);
+                const file = mediaUpload.files[0];
+
+                if (content || file) {
+                    addPost(content, file);
                     postContent.value = '';
+                    mediaUpload.value = '';
+                } else {
+                    alert('Please add a caption or upload a picture/video.');
                 }
             });
 
             // Add a new post
-            function addPost(content) {
+            function addPost(content, file) {
                 const post = document.createElement('div');
                 post.className = 'post';
-                post.innerHTML = `
-                    <p>${content}</p>
-                    <small>Posted on ${new Date().toLocaleString()}</small>
-                `;
-                feed.prepend(post);
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        if (file.type.startsWith('image')) {
+                            post.innerHTML = `
+                                <img src="${e.target.result}" alt="Uploaded Image">
+                                <p>${content}</p>
+                                <small>Posted on ${new Date().toLocaleString()}</small>
+                            `;
+                        } else if (file.type.startsWith('video')) {
+                            post.innerHTML = `
+                                <video controls>
+                                    <source src="${e.target.result}" type="${file.type}">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p>${content}</p>
+                                <small>Posted on ${new Date().toLocaleString()}</small>
+                            `;
+                        }
+                        feed.prepend(post);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    post.innerHTML = `
+                        <p>${content}</p>
+                        <small>Posted on ${new Date().toLocaleString()}</small>
+                    `;
+                    feed.prepend(post);
+                }
             }
 
             // Sample posts
-            addPost("Just watched the SpaceX launch. Amazing!");
-            addPost("Who's excited for the next Mars rover mission?");
+            addPost("Just watched the SpaceX launch. Amazing!", null);
+            addPost("Who's excited for the next Mars rover mission?", null);
 
             // Profile Picture Upload
             const profilePictureUpload = document.getElementById('profile-picture-upload');
