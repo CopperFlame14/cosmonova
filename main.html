@@ -335,6 +335,78 @@
         #explore .post video {
             background: #000;
         }
+
+        #chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--post-background);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#chat-window {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--post-background);
+    color: var(--post-text);
+}
+
+#chat-input-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--post-background);
+    color: var(--post-text);
+}
+
+#send-button {
+    background-color: #16213e;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.message {
+    margin-bottom: 1rem;
+}
+
+.message.user {
+    text-align: right;
+}
+
+.message.ai {
+    text-align: left;
+}
+
+.message p {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    max-width: 70%;
+}
+
+.message.user p {
+    background-color: #16213e;
+    color: white;
+}
+
+.message.ai p {
+    background-color: #e0e0e0;
+    color: var(--post-text);
+}
     </style>
 </head>
 <body>
@@ -446,8 +518,15 @@
 
         <div id="messages" class="page">
             <h2>Messages</h2>
-            <p>Your private messages will appear here. Stay connected with your space friends!</p>
-            <!-- Add messaging functionality here -->
+            <div id="chat-container">
+                <div id="chat-window">
+                    <!-- Chat messages will appear here -->
+                </div>
+                <div id="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Type your message..." />
+                    <button id="send-button">Send</button>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -588,6 +667,59 @@
                 document.getElementById('profile-picture-header').src = savedProfilePicture;
             }
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const chatWindow = document.getElementById('chat-window');
+    const chatInput = document.getElementById('chat-input');
+    const sendButton = document.getElementById('send-button');
+
+    // Function to add a message to the chat window
+    function addMessage(sender, text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+        messageDiv.innerHTML = `<p>${text}</p>`;
+        chatWindow.appendChild(messageDiv);
+        chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll to the latest message
+    }
+
+    // Function to simulate AI response
+    function getAIResponse(userMessage) {
+        // Simple hardcoded responses for demonstration
+        const responses = [
+            "That's fascinating! Tell me more.",
+            "I'm not sure I understand. Can you elaborate?",
+            "Interesting! What do you think about space exploration?",
+            "Wow, that's amazing! How did you learn about that?",
+            "I love talking about space! What's your favorite planet?",
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+
+    // Handle sending a message
+    sendButton.addEventListener('click', () => {
+        const userMessage = chatInput.value.trim();
+        if (userMessage) {
+            addMessage('user', userMessage);
+            chatInput.value = ''; // Clear the input field
+
+            // Simulate AI response after a short delay
+            setTimeout(() => {
+                const aiResponse = getAIResponse(userMessage);
+                addMessage('ai', aiResponse);
+            }, 1000);
+        }
+    });
+
+    // Allow pressing Enter to send a message
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendButton.click(); // Trigger the send button click event
+        }
+    });
+
+    // Add a welcome message from the AI
+    addMessage('ai', "Hi! I'm your SpaceConnect AI. How can I assist you today?");
+});
     </script>
 </body>
 </html>
