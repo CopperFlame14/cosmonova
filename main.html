@@ -195,6 +195,19 @@
             pointer-events: none; /* Disable editing by default */
         }
 
+        #profile-username{
+            width: 100%;
+            height: 25px;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            background-color: var(--post-background);
+            color: var(--post-text);
+            resize: none;
+            pointer-events: none; /* Disable editing by default */
+        }
+
         #profile-picture-upload {
             margin-bottom: 1rem;
             pointer-events: none; /* Disable editing by default */
@@ -413,6 +426,7 @@
             <div>
                 <img id="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture">
             </div>
+            <textarea id="profile-username" placeholder="username"></textarea>
             <textarea id="profile-bio" placeholder="Write something about yourself..."></textarea>
         </div>
 
@@ -628,6 +642,10 @@
             if (savedProfilePicture) {
                 document.getElementById('profile-picture').src = savedProfilePicture;
                 document.getElementById('profile-picture-header').src = savedProfilePicture;
+            }
+
+            if(savedUsername){
+                document.getElementById('profile-username').value=savedUsername;
             }
         });
 
