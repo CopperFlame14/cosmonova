@@ -250,163 +250,125 @@
         }
 
         /* Explore Page Styles */
-        #explore .post-form {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        #explore .videos-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center video cards horizontally */
+            gap: 20px; /* Add some spacing between video cards */
         }
 
-        #explore .post-form label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            color: var(--header-text);
-        }
-
-        #explore .post-form textarea {
+        #explore .video-card {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid var(--header-text);
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-color);
-            font-size: 1rem;
-            resize: vertical;
-            height: 100px;
-        }
-
-        #explore .post-form input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid var(--header-text);
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-color);
-            font-size: 1rem;
-        }
-
-        #explore .post-form button {
-            background: var(--header-text);
-            color: var(--header-background);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        #explore .post-form button:hover {
-            background: #e0e0e0;
-        }
-
-        #explore .post {
+            max-width: 600px; /* Limit the width of each video card */
+            text-align: center; /* Center text and content inside the card */
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             padding: 15px;
-            margin-bottom: 20px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        #explore .post:hover {
+        #explore .video-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
         }
 
-        #explore .post p {
-            margin: 0 0 10px;
-            font-size: 1.1rem;
-            color: var(--text-color);
-        }
-
-        #explore .post img,
-        #explore .post video {
+        #explore .video-card video {
             max-width: 100%;
             border-radius: 5px;
             display: block;
+            margin: 0 auto 10px; /* Center the video horizontally */
+        }
+
+        #explore .video-card h3 {
             margin: 10px 0;
+            font-size: 1.2rem;
+            color: var(--text-color);
         }
 
-        #explore .post video {
-            background: #000;
+        #explore .video-card .likes-section,
+        #explore .video-card .comments-section {
+            margin-top: 10px;
         }
 
+        #explore .video-card .comments-section input {
+            width: 80%;
+            margin: 10px auto;
+            display: block;
+        }
+
+        /* Chat Container Styles */
         #chat-container {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: var(--post-background);
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--post-background);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-#chat-window {
-    height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background-color: var(--post-background);
-    color: var(--post-text);
-}
+        #chat-window {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: var(--post-background);
+            color: var(--post-text);
+        }
 
-#chat-input-container {
-    display: flex;
-    gap: 0.5rem;
-}
+        #chat-input-container {
+            display: flex;
+            gap: 0.5rem;
+        }
 
-#chat-input {
-    flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: var(--post-background);
-    color: var(--post-text);
-}
+        #chat-input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: var(--post-background);
+            color: var(--post-text);
+        }
 
-#send-button {
-    background-color: #16213e;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        #send-button {
+            background-color: #16213e;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-.message {
-    margin-bottom: 1rem;
-}
+        .message {
+            margin-bottom: 1rem;
+        }
 
-.message.user {
-    text-align: right;
-}
+        .message.user {
+            text-align: right;
+        }
 
-.message.ai {
-    text-align: left;
-}
+        .message.ai {
+            text-align: left;
+        }
 
-.message p {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    max-width: 70%;
-}
+        .message p {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            max-width: 70%;
+        }
 
-.message.user p {
-    background-color: #16213e;
-    color: white;
-}
+        .message.user p {
+            background-color: #16213e;
+            color: white;
+        }
 
-.message.ai p {
-    background-color: #004d0c;
-    color:#e0e0e0;
-}
+        .message.ai p {
+            background-color: #004d0c;
+            color:#e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -669,57 +631,57 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-    const chatWindow = document.getElementById('chat-window');
-    const chatInput = document.getElementById('chat-input');
-    const sendButton = document.getElementById('send-button');
+            const chatWindow = document.getElementById('chat-window');
+            const chatInput = document.getElementById('chat-input');
+            const sendButton = document.getElementById('send-button');
 
-    // Function to add a message to the chat window
-    function addMessage(sender, text) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${sender}`;
-        messageDiv.innerHTML = `<p>${text}</p>`;
-        chatWindow.appendChild(messageDiv);
-        chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll to the latest message
-    }
+            // Function to add a message to the chat window
+            function addMessage(sender, text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                messageDiv.innerHTML = `<p>${text}</p>`;
+                chatWindow.appendChild(messageDiv);
+                chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll to the latest message
+            }
 
-    // Function to simulate AI response
-    function getAIResponse(userMessage) {
-        // Simple hardcoded responses for demonstration
-        const responses = [
-            "That's fascinating! Tell me more.",
-            "I'm not sure I understand. Can you elaborate?",
-            "Interesting! What do you think about space exploration?",
-            "Wow, that's amazing! How did you learn about that?",
-            "I love talking about space! What's your favorite planet?",
-        ];
-        return responses[Math.floor(Math.random() * responses.length)];
-    }
+            // Function to simulate AI response
+            function getAIResponse(userMessage) {
+                // Simple hardcoded responses for demonstration
+                const responses = [
+                    "That's fascinating! Tell me more.",
+                    "I'm not sure I understand. Can you elaborate?",
+                    "Interesting! What do you think about space exploration?",
+                    "Wow, that's amazing! How did you learn about that?",
+                    "I love talking about space! What's your favorite planet?",
+                ];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
 
-    // Handle sending a message
-    sendButton.addEventListener('click', () => {
-        const userMessage = chatInput.value.trim();
-        if (userMessage) {
-            addMessage('user', userMessage);
-            chatInput.value = ''; // Clear the input field
+            // Handle sending a message
+            sendButton.addEventListener('click', () => {
+                const userMessage = chatInput.value.trim();
+                if (userMessage) {
+                    addMessage('user', userMessage);
+                    chatInput.value = ''; // Clear the input field
 
-            // Simulate AI response after a short delay
-            setTimeout(() => {
-                const aiResponse = getAIResponse(userMessage);
-                addMessage('ai', aiResponse);
-            }, 1000);
-        }
-    });
+                    // Simulate AI response after a short delay
+                    setTimeout(() => {
+                        const aiResponse = getAIResponse(userMessage);
+                        addMessage('ai', aiResponse);
+                    }, 1000);
+                }
+            });
 
-    // Allow pressing Enter to send a message
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            sendButton.click(); // Trigger the send button click event
-        }
-    });
+            // Allow pressing Enter to send a message
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendButton.click(); // Trigger the send button click event
+                }
+            });
 
-    // Add a welcome message from the AI
-    addMessage('ai', "Hi! I'm your SpaceConnect AI. How can I assist you today?");
-});
+            // Add a welcome message from the AI
+            addMessage('ai', "Hi! I'm your SpaceConnect AI. How can I assist you today?");
+        });
     </script>
 </body>
 </html>
