@@ -1,2 +1,2 @@
 website link:
-https://krishni14.github.io/cosmonova/
+https://copperflame14.github.io/cosmonova/
