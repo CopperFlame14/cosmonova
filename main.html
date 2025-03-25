@@ -4,8 +4,410 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpaceConnect - Social Media for Space Enthusiasts</title>
-    <link rel="stylesheet" href="main.css">
-    <script src = "script.js" defer></script>
+    <style>
+        :root {
+            --background-color: #f0f0f0;
+            --text-color: #333;
+            --header-background: #1a1a2e;
+            --header-text: white;
+            --post-background: white;
+            --post-text: #333;
+            --footer-background: #1a1a2e;
+            --footer-text: white;
+            --background-image: url('https://th.bing.com/th/id/OIP.Gd4NDqeIdmX04Vp-PqqzVQHaE8?rs=1&pid=ImgDetMain'); /* Light theme background image */
+            --main-background:rgba(255, 255, 255, 0.5);
+        }
+
+        [data-theme="dark"] {
+            --background-color: #121212;
+            --text-color: #e0e0e0;
+            --header-background: #0d0d0d;
+            --header-text: #e0e0e0;
+            --post-background: #1e1e1e;
+            --post-text: #e0e0e0;
+            --footer-background: #0d0d0d;
+            --footer-text: #e0e0e0;
+            --background-image: url('https://th.bing.com/th/id/R.b108427141d977e1530072a3268eea65?rik=4mlY93%2f66dMeAA&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f08%2fNight-Sky-Milky-Way-Galaxy-Wallpaper.jpg&ehk=PeL8fhnPu3P4MbsHB%2fDsbaIyHdVOtcho0sta3wlylbk%3d&risl=&pid=ImgRaw&r=0'); /* No background image in dark theme */
+            --main-background:rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            background-image: var(--background-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: var(--header-background);
+            color: var(--header-text);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav ul li a {
+            color: var(--header-text);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #profile-picture-header {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid var(--header-text);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: var(--main-background);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #post-form {
+            background-color: var(--post-background);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        #post-content {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: var(--post-background);
+            color: var(--post-text);
+        }
+
+        #media-upload {
+            margin-bottom: 1rem;
+        }
+
+        #post-button {
+            background-color: #16213e;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .post {
+            background-color: var(--post-background);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            color: var(--post-text);
+        }
+
+        .post img,
+        .post video {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--footer-background);
+            color: var(--footer-text);
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--header-text);
+            margin-left: auto;
+        }
+
+        /* Profile Page Styles */
+        #profile {
+            background-color: var(--post-background);
+            padding: 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        #profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        #profile-bio {
+            width: 100%;
+            height: 100px;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            background-color: var(--post-background);
+            color: var(--post-text);
+            resize: none;
+            pointer-events: none; /* Disable editing by default */
+        }
+
+        #profile-picture-upload {
+            margin-bottom: 1rem;
+            pointer-events: none; /* Disable editing by default */
+        }
+
+        #profile-save-button {
+            background-color: #16213e;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            pointer-events: none; /* Disable editing by default */
+            opacity: 0.5; /* Make it look disabled */
+        }
+
+        /* Three-dot menu */
+        .profile-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+        }
+
+        .profile-menu .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--post-background);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .profile-menu .dropdown button {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--post-text);
+            cursor: pointer;
+        }
+
+        .profile-menu .dropdown button:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-menu.active .dropdown {
+            display: block;
+        }
+
+        /* Explore Page Styles */
+        #explore .post-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        #explore .post-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: var(--header-text);
+        }
+
+        #explore .post-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--header-text);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 1rem;
+            resize: vertical;
+            height: 100px;
+        }
+
+        #explore .post-form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--header-text);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        #explore .post-form button {
+            background: var(--header-text);
+            color: var(--header-background);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #explore .post-form button:hover {
+            background: #e0e0e0;
+        }
+
+        #explore .post {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #explore .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        #explore .post p {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        #explore .post img,
+        #explore .post video {
+            max-width: 100%;
+            border-radius: 5px;
+            display: block;
+            margin: 10px 0;
+        }
+
+        #explore .post video {
+            background: #000;
+        }
+
+        #chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--post-background);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#chat-window {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--post-background);
+    color: var(--post-text);
+}
+
+#chat-input-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--post-background);
+    color: var(--post-text);
+}
+
+#send-button {
+    background-color: #16213e;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.message {
+    margin-bottom: 1rem;
+}
+
+.message.user {
+    text-align: right;
+}
+
+.message.ai {
+    text-align: left;
+}
+
+.message p {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    max-width: 70%;
+}
+
+.message.user p {
+    background-color: #16213e;
+    color: white;
+}
+
+.message.ai p {
+    background-color: #004d0c;
+    color:#e0e0e0;
+}
+    </style>
 </head>
 <body>
     <header>
@@ -48,7 +450,6 @@
             <div>
                 <img id="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture">
             </div>
-            <textarea id="profile-username" placeholder="username"></textarea>
             <textarea id="profile-bio" placeholder="Write something about yourself..."></textarea>
         </div>
 
@@ -132,5 +533,193 @@
     <footer>
         <p>&copy; 2025 SpaceConnect. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const postButton = document.getElementById('post-button');
+            const postContent = document.getElementById('post-content');
+            const mediaUpload = document.getElementById('media-upload');
+            const feed = document.getElementById('feed');
+
+            // Handle post creation
+            postButton.addEventListener('click', () => {
+                const content = postContent.value.trim();
+                const file = mediaUpload.files[0];
+
+                if (content || file) {
+                    addPost(content, file);
+                    postContent.value = '';
+                    mediaUpload.value = '';
+                } else {
+                    alert('Please add a caption or upload a picture/video.');
+                }
+            });
+
+            // Add a new post
+            function addPost(content, file) {
+                const post = document.createElement('div');
+                post.className = 'post';
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        if (file.type.startsWith('image')) {
+                            post.innerHTML = `
+                                <img src="${e.target.result}" alt="Uploaded Image">
+                                <p>${content}</p>
+                                <small>Posted on ${new Date().toLocaleString()}</small>
+                            `;
+                        } else if (file.type.startsWith('video')) {
+                            post.innerHTML = `
+                                <video controls>
+                                    <source src="${e.target.result}" type="${file.type}">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p>${content}</p>
+                                <small>Posted on ${new Date().toLocaleString()}</small>
+                            `;
+                        }
+                        feed.prepend(post);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    post.innerHTML = `
+                        <p>${content}</p>
+                        <small>Posted on ${new Date().toLocaleString()}</small>
+                    `;
+                    feed.prepend(post);
+                }
+            }
+
+            // Sample posts
+            addPost("Just watched the SpaceX launch. Amazing!", null);
+            addPost("Who's excited for the next Mars rover mission?", null);
+
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            themeToggle.addEventListener('click', () => {
+                const isDarkTheme = body.getAttribute('data-theme') === 'dark';
+                body.setAttribute('data-theme', isDarkTheme ? 'light' : 'dark');
+                themeToggle.textContent = isDarkTheme ? '🌓':'🌞';
+            });
+
+            // Three-dot menu for profile editing
+            const profileMenu = document.querySelector('.profile-menu');
+            const editProfileButton = document.getElementById('edit-profile-button');
+
+            profileMenu.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent the click from closing the dropdown immediately
+                profileMenu.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', () => {
+                profileMenu.classList.remove('active');
+            });
+
+            // Like Button Functionality
+            const likeButtons = document.querySelectorAll('.like-button');
+
+            likeButtons.forEach((button) => {
+                let isLiked = false; // Track whether the user has liked the post
+
+                button.addEventListener('click', () => {
+                    const likeCount = button.nextElementSibling; // The span containing the like count
+                    let currentLikes = parseInt(likeCount.textContent); // Get the current like count
+
+                    if (isLiked) {
+                        // If already liked, decrease the like count
+                        currentLikes--;
+                        button.textContent = '👍 Like'; // Reset the button text
+                    } else {
+                        // If not liked, increase the like count
+                        currentLikes++;
+                        button.textContent = '👎 Unlike'; // Change the button text
+                    }
+
+                    likeCount.textContent = `${currentLikes} Likes`; // Update the like count display
+                    isLiked = !isLiked; // Toggle the like state
+                });
+            });
+        });
+
+        // Show the selected page
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load saved profile data
+            const savedUsername = localStorage.getItem('username');
+            const savedBio = localStorage.getItem('bio');
+            const savedProfilePicture = localStorage.getItem('profilePicture');
+
+            if (savedUsername) {
+                document.getElementById('profile-bio').value = savedBio;
+            }
+
+            if (savedProfilePicture) {
+                document.getElementById('profile-picture').src = savedProfilePicture;
+                document.getElementById('profile-picture-header').src = savedProfilePicture;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const chatWindow = document.getElementById('chat-window');
+    const chatInput = document.getElementById('chat-input');
+    const sendButton = document.getElementById('send-button');
+
+    // Function to add a message to the chat window
+    function addMessage(sender, text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+        messageDiv.innerHTML = `<p>${text}</p>`;
+        chatWindow.appendChild(messageDiv);
+        chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll to the latest message
+    }
+
+    // Function to simulate AI response
+    function getAIResponse(userMessage) {
+        // Simple hardcoded responses for demonstration
+        const responses = [
+            "That's fascinating! Tell me more.",
+            "I'm not sure I understand. Can you elaborate?",
+            "Interesting! What do you think about space exploration?",
+            "Wow, that's amazing! How did you learn about that?",
+            "I love talking about space! What's your favorite planet?",
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+
+    // Handle sending a message
+    sendButton.addEventListener('click', () => {
+        const userMessage = chatInput.value.trim();
+        if (userMessage) {
+            addMessage('user', userMessage);
+            chatInput.value = ''; // Clear the input field
+
+            // Simulate AI response after a short delay
+            setTimeout(() => {
+                const aiResponse = getAIResponse(userMessage);
+                addMessage('ai', aiResponse);
+            }, 1000);
+        }
+    });
+
+    // Allow pressing Enter to send a message
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendButton.click(); // Trigger the send button click event
+        }
+    });
+
+    // Add a welcome message from the AI
+    addMessage('ai', "Hi! I'm your SpaceConnect AI. How can I assist you today?");
+});
+    </script>
 </body>
 </html>
